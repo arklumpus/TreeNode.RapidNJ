@@ -1,0 +1,10 @@
+.DS_Store
+.vs/
+*/.vs/
+*.user
+*/bin
+*/obj
+native/CMakePresets.json
+native/out
+native/rapidNJWrapper/lib
+Release

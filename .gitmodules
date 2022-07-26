@@ -1,0 +1,3 @@
+[submodule "native/rapidNJWrapper/thirdparty/rapidNJ"]
+	path = native/rapidNJWrapper/thirdparty/rapidNJ
+	url = https://github.com/arklumpus/rapidNJ-library.git
