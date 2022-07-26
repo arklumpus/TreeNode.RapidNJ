@@ -6,10 +6,16 @@
 #include <stdlib.h>
 #include <string>
 #include <cstring>
-#include <emmintrin.h>
 #include <vector>
 #include "pthread.h"
 #include "ProgressBar.hpp"
+
+#if defined _M_X64 || defined _M_I86
+#include <emmintrin.h>
+#else
+#include "sse2neon.h"
+#endif
+
 
 #if defined _WIN32 || defined _WIN64
 #else
