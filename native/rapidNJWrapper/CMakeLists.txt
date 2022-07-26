@@ -43,7 +43,6 @@ if (APPLE)
 	endif()
 	
 	if (${CMAKE_HOST_SYSTEM_PROCESSOR} MATCHES "arm64")
-		target_link_libraries(rapidNJWrapper "${CMAKE_CURRENT_SOURCE_DIR}/lib/win-x64/rapidNJ.lib")
-		target_link_libraries(rapidNJWrapper "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/rapidNJ/lib/x64/pthreadVC2S.lib")
+		target_link_libraries(rapidNJWrapper "${CMAKE_CURRENT_SOURCE_DIR}/lib/mac-arm64/rapidNJ.a")
 	endif()
 endif()
