@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeNode.RapidNJ", "TreeNod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{541EF3A5-04E0-450B-9953-BB47A7B3AE19}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestHost", "TestHost\TestHost.csproj", "{005695FB-DD57-4F7E-885A-6643AFF6164A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapidNJTestHost", "RapidNJTestHost\RapidNJTestHost.csproj", "{005695FB-DD57-4F7E-885A-6643AFF6164A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,7 +14,7 @@ xcopy Resources\* Release\RapidNJTests\ /s /y /h >nul
 echo.
 echo Building with target [94mwin-x64[0m
 
-cd TestHost
+cd RapidNJTestHost
 dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-x64.pubxml
 cd ..
 
@@ -35,7 +35,7 @@ cd ..\..
 echo.
 echo Building with target [94mlinux-x64[0m
 
-cd TestHost
+cd RapidNJTestHost
 dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\linux-x64.pubxml
 cd ..
 
@@ -56,7 +56,7 @@ cd ..\..
 echo.
 echo Building with target [94mmac-x64[0m
 
-cd TestHost
+cd RapidNJTestHost
 dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\mac-x64.pubxml
 cd ..
 
@@ -77,7 +77,7 @@ cd ..\..
 echo.
 echo Building with target [94mmac-arm64[0m
 
-cd TestHost
+cd RapidNJTestHost
 dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\mac-arm64.pubxml /p:PlatformTarget=arm64
 cd ..
 
@@ -98,7 +98,7 @@ cd ..\..
 echo.
 echo Building with target [94mlinux-arm64[0m
 
-cd TestHost
+cd RapidNJTestHost
 dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\linux-arm64.pubxml /p:PlatformTarget=arm64
 cd ..
 
