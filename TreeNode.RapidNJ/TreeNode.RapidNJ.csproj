@@ -6,7 +6,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <Description>TreeNode.RapidNJ provides C# bindings for rapidNJ (doi:10.1007/978-3-540-87361-7_10), making it possible to create neighbour-joining trees from sequence alignments or distance matrices.</Description>
-    <Version>0.0.1-a14</Version>
+    <Version>0.0.1-a15</Version>
     <Authors>Giorgio Bianchini</Authors>
     <Company>University of Bristol</Company>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
@@ -40,6 +40,13 @@
     <Content Include="..\native\out\build\mac-x64\rapidNJWrapper\librapidNJWrapper.dylib">
       <Pack>true</Pack>
         <PackagePath>runtimes/osx-x64/native/</PackagePath>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\native\out\build\mac-arm64\rapidNJWrapper\librapidNJWrapper.dylib">
+      <Pack>true</Pack>
+      <PackagePath>runtimes/osx-arm64/native/</PackagePath>
     </Content>
   </ItemGroup>
 

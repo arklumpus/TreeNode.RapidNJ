@@ -74,6 +74,27 @@ rmdir RapidNJTests-mac-x64
 
 cd ..\..
 
+echo.
+echo Building with target [94mmac-arm64[0m
+
+cd TestHost
+dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\mac-arm64.pubxml /p:PlatformTarget=arm64
+cd ..
+
+echo.
+echo [104;97mCreating ZIP file...[0m
+
+cd Release\RapidNJTests
+
+move mac-arm64 RapidNJTests-mac-arm64
+bash -c "zip -r RapidNJTests-mac-arm64.zip RapidNJTests-mac-arm64 >/dev/null"
+
+for /f %%i in ('dir /a:d /b "RapidNJTests-mac-arm64"\*') do rd /s /q "RapidNJTests-mac-arm64"\%%i
+del RapidNJTests-mac-arm64\* /s /f /q 1>nul
+rmdir RapidNJTests-mac-arm64
+
+cd ..\..
+
 exit /B
 
 echo.
@@ -136,27 +157,6 @@ bash -c "tar -czf MuPDFCoreTests-linux-arm64.tar.gz MuPDFCoreTests-linux-arm64"
 for /f %%i in ('dir /a:d /b "MuPDFCoreTests-linux-arm64"\*') do rd /s /q "MuPDFCoreTests-linux-arm64"\%%i
 del MuPDFCoreTests-linux-arm64\* /s /f /q 1>nul
 rmdir MuPDFCoreTests-linux-arm64
-
-cd ..\..
-
-echo.
-echo Building with target [94mmac-arm64[0m
-
-cd TestHost
-dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\mac-arm64.pubxml /p:PlatformTarget=arm64
-cd ..
-
-echo.
-echo [104;97mCreating ZIP file...[0m
-
-cd Release\MuPDFCoreTests
-
-move mac-arm64 MuPDFCoreTests-mac-arm64
-bash -c "zip -r MuPDFCoreTests-mac-arm64.zip MuPDFCoreTests-mac-arm64 >/dev/null"
-
-for /f %%i in ('dir /a:d /b "MuPDFCoreTests-mac-arm64"\*') do rd /s /q "MuPDFCoreTests-mac-arm64"\%%i
-del MuPDFCoreTests-mac-arm64\* /s /f /q 1>nul
-rmdir MuPDFCoreTests-mac-arm64
 
 cd ..\..
 
