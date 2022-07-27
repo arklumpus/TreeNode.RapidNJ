@@ -116,49 +116,5 @@ rmdir RapidNJTests-linux-arm64
 
 cd ..\..
 
-exit /B
-
-echo.
-echo Building with target [94mwin-x86[0m
-
-cd TestHost
-dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-x86.pubxml /p:PlatformTarget=x86
-cd ..
-
-echo.
-echo [104;97mCreating ZIP file...[0m
-
-cd Release\MuPDFCoreTests
-
-move win-x86 MuPDFCoreTests-win-x86
-bash -c "zip -r MuPDFCoreTests-win-x86.zip MuPDFCoreTests-win-x86 >/dev/null"
-
-for /f %%i in ('dir /a:d /b "MuPDFCoreTests-win-x86"\*') do rd /s /q "MuPDFCoreTests-win-x86"\%%i
-del MuPDFCoreTests-win-x86\* /s /f /q 1>nul
-rmdir MuPDFCoreTests-win-x86
-
-cd ..\..
-
-echo.
-echo Building with target [94mwin-arm64[0m
-
-cd TestHost
-dotnet publish -c Release /p:PublishProfile=Properties\PublishProfiles\win-arm64.pubxml /p:PlatformTarget=arm64
-cd ..
-
-echo.
-echo [104;97mCreating ZIP file...[0m
-
-cd Release\MuPDFCoreTests
-
-move win-arm64 MuPDFCoreTests-win-arm64
-bash -c "zip -r MuPDFCoreTests-win-arm64.zip MuPDFCoreTests-win-arm64 >/dev/null"
-
-for /f %%i in ('dir /a:d /b "MuPDFCoreTests-win-arm64"\*') do rd /s /q "MuPDFCoreTests-win-arm64"\%%i
-del MuPDFCoreTests-win-arm64\* /s /f /q 1>nul
-rmdir MuPDFCoreTests-win-arm64
-
-cd ..\..
-
 echo.
 echo [94mAll done![0m

@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RuntimeIdentifiers>win-x64;win-x86;win-arm64;linux-x64;linux-arm64;osx-x64;osx-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win-x64;linux-x64;linux-arm64;osx-x64;osx-arm64</RuntimeIdentifiers>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <Description>TreeNode.RapidNJ provides C# bindings for rapidNJ (doi:10.1007/978-3-540-87361-7_10), making it possible to create neighbour-joining trees from sequence alignments or distance matrices.</Description>
-    <Version>0.0.1-a16</Version>
+    <Version>0.0.1-a17</Version>
     <Authors>Giorgio Bianchini</Authors>
     <Company>University of Bristol</Company>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/arklumpus/TreeNode.RapidNJ</PackageProjectUrl>
-    <PackageTags>phylogeny tree neighbour neighbor joining</PackageTags>
+    <PackageTags>phylogeny tree neighbour joining</PackageTags>
     <RepositoryUrl>https://github.com/arklumpus/TreeNode.RapidNJ</RepositoryUrl>
   </PropertyGroup>
 
