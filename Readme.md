@@ -49,9 +49,9 @@ The following sections provide more details into the various methods contained i
 The `BuildTreeFromAlignment` method can be used to build a tree from a sequence alignment. There are two overloads of this method: one that requires the sequence alignment to be provided as a `Dictionary<string, string>` (where the keys are the sequence names, and the values are the aligned sequences), and another that requires the sequence names and sequences to be provided as two separate lists of strings (elements with the same index from the two lists are assumed to belong together). Aside from this, the two methods have the same optional parameters:
 
 ```CSharp
-public static TreeNode BuildTreeFromAlignment(Dictionary<string, string> alignment, EvolutionModel evolutionModel = EvolutionModel.Kimura, int bootstrapReplicates = 0, AlignmentType alignmentType = AlignmentType.Autodetect, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null)
+public static TreeNode BuildTreeFromAlignment(Dictionary<string, string> alignment, EvolutionModel evolutionModel = EvolutionModel.Kimura, int bootstrapReplicates = 0, AlignmentType alignmentType = AlignmentType.Autodetect, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null);
 
-public static TreeNode BuildTreeFromAlignment(IReadOnlyList<string> sequenceNames, IReadOnlyList<string> sequences, EvolutionModel evolutionModel = EvolutionModel.Kimura, int bootstrapReplicates = 0, AlignmentType alignmentType = AlignmentType.Autodetect, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null)
+public static TreeNode BuildTreeFromAlignment(IReadOnlyList<string> sequenceNames, IReadOnlyList<string> sequences, EvolutionModel evolutionModel = EvolutionModel.Kimura, int bootstrapReplicates = 0, AlignmentType alignmentType = AlignmentType.Autodetect, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null);
 ```
 
 The alignment can consist of either DNA or amino acid (protein) sequences, which must all have the same length. By default, the type of alignment is detected automatically, but it can also be specified using an optional parameter. Note that the library provides no facility to read a sequence alignment from a file - you should have your own way e.g. of parsing a FASTA file.
@@ -81,9 +81,9 @@ The two methods have the following optional parameters:
 The `BuildDistanceMatrixFromAlignment` method can be used to create a distance matrix from a sequence alignment. Similar to the `BuildTreeFromAlignment` method, the alignment can be supplied either as a `Dictionary<string, string>`, or as two separate lists of sequence names and sequence data. The two overloads of this method also have some optional parameters:
 
 ```CSharp
-public static float[][] BuildDistanceMatrixFromAlignment(Dictionary<string, string> alignment, EvolutionModel evolutionModel = EvolutionModel.Kimura, AlignmentType alignmentType = AlignmentType.Autodetect, bool verbose = false, int numCores = 0)
+public static float[][] BuildDistanceMatrixFromAlignment(Dictionary<string, string> alignment, EvolutionModel evolutionModel = EvolutionModel.Kimura, AlignmentType alignmentType = AlignmentType.Autodetect, bool verbose = false, int numCores = 0);
 
-public static float[][] BuildDistanceMatrixFromAlignment(IReadOnlyList<string> sequenceNames, IReadOnlyList<string> sequences, EvolutionModel evolutionModel = EvolutionModel.Kimura, AlignmentType alignmentType = AlignmentType.Autodetect, bool verbose = false, int numCores = 0)
+public static float[][] BuildDistanceMatrixFromAlignment(IReadOnlyList<string> sequenceNames, IReadOnlyList<string> sequences, EvolutionModel evolutionModel = EvolutionModel.Kimura, AlignmentType alignmentType = AlignmentType.Autodetect, bool verbose = false, int numCores = 0);
 ```
 
 The meaning of the optional parameters is exactly the same as for the parameters of the `BuildTreeFromAlignment` method. The distance matrix is returned as a square symmetrical jagged array.
@@ -99,13 +99,13 @@ Finally, the `BuildTreeFromDistanceMatrix` method can be used to build a tree fr
 As a result, the `BuildTreeFromDistanceMatrix` method has four overloads:
 
 ```CSharp
-BuildTreeFromDistanceMatrix(float[][] distanceMatrix, IReadOnlyList<string> sequenceNames, bool copyMatrix = true, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null)
+BuildTreeFromDistanceMatrix(float[][] distanceMatrix, IReadOnlyList<string> sequenceNames, bool copyMatrix = true, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null);
 
-BuildTreeFromDistanceMatrix(float[,] distanceMatrix, IReadOnlyList<string> sequenceNames, bool copyMatrix = true, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null)
+BuildTreeFromDistanceMatrix(float[,] distanceMatrix, IReadOnlyList<string> sequenceNames, bool copyMatrix = true, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null);
 
-BuildTreeFromDistanceMatrix(Span<float> distanceMatrix, IReadOnlyList<string> sequenceNames, bool copyMatrix = true, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null)
+BuildTreeFromDistanceMatrix(Span<float> distanceMatrix, IReadOnlyList<string> sequenceNames, bool copyMatrix = true, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null);
 
-BuildTreeFromDistanceMatrix(ReadOnlySpan<float> distanceMatrix, IReadOnlyList<string> sequenceNames, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null)
+BuildTreeFromDistanceMatrix(ReadOnlySpan<float> distanceMatrix, IReadOnlyList<string> sequenceNames, bool allowNegativeBranches = true, bool verbose = false, int numCores = 0, Action<double> progress = null);
 ```
 
 In addition to the distance matrix, a list of strings that represent the sequence names is also required. This should have the same size as the distance matrix. The optional parameters are the same for all the overloads:
