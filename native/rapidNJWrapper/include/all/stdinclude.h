@@ -10,7 +10,7 @@
 #include "pthread.h"
 #include "ProgressBar.hpp"
 
-#if defined _M_X64 || defined _M_I86
+#if defined _M_X64 || defined _M_I86 || defined __x86_64__
 #include <emmintrin.h>
 #else
 #include "sse2neon.h"
