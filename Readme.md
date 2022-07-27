@@ -11,7 +11,7 @@ The library is released under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.h
 
 ## Getting started
 
-The TreeNode.RapidNJ library targets .NET Standard 2.1, thus it can be used in projects that target .NET Standard 2.1+, .NET Core 3.0+, .NET 5.0+, and possibly others. MuPDFCore includes a pre-compiled native library, which currently supports the following platforms:
+The TreeNode.RapidNJ library targets .NET Standard 2.1, thus it can be used in projects that target .NET Standard 2.1+, .NET Core 3.0+, .NET 5.0+, and possibly others. TreeNode.RapidNJ includes a pre-compiled native library, which currently supports the following platforms:
 
 * Windows x64 (64 bit)
 * Linux x64 (64 bit)
