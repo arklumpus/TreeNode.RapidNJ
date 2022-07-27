@@ -20,6 +20,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	elif [[ "$architecture" == "aarch64" ]]; then
 		echo "Building linux-arm64 native library..." ;
 		echo ;
+		cd rapidNJWrapper/thirdparty/rapidNJ ;
+		make clean ;
+		make ;
+		cd ../../../ ;
 		rm -rf out/build/linux-arm64 ;
 		mkdir -p out/build/linux-arm64 ;
 		cd out/build/linux-arm64 ;
