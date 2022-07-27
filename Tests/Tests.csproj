@@ -25,7 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="TreeNode.RapidNJ" Version="1.0.0-a1" />
+		<PackageReference Include="TreeNode.RapidNJ" Version="1.0.0-a2" />
 	</ItemGroup>
 
 </Project>
