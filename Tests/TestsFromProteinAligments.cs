@@ -49,6 +49,17 @@ namespace Tests
             return tbr;
         }
 
+        private static void TolerateTree(TreeNode tree)
+        {
+            foreach (TreeNode node in tree.GetChildrenRecursiveLazy())
+            {
+                if (Math.Abs(node.Length) < 1e-7)
+                {
+                    node.Length = 0;
+                }
+            }
+        }
+
         private static Dictionary<string, string> FullAlignmentProtein = ReadFasta(Assembly.GetExecutingAssembly().GetManifestResourceStream("Tests.Data.AlignmentProtein.fas"));
 
         private static Dictionary<string, string> GetAlignmentProtein(int count, int length = 670)
@@ -97,6 +108,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(Tree2, treeAsNewick, "The tree is different than expected.");
@@ -108,6 +121,8 @@ namespace Tests
             Dictionary<string, string> alignment = GetAlignmentProtein(3);
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -121,6 +136,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(Tree4, treeAsNewick, "The tree is different than expected.");
@@ -132,6 +149,8 @@ namespace Tests
             Dictionary<string, string> alignment = GetAlignmentProtein(10);
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -145,6 +164,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -154,6 +175,9 @@ namespace Tests
         public void BuildTreeJC()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentProtein, RapidNJ.EvolutionModel.JukesCantor);
+
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
             Assert.AreEqual(FullTreeJC, treeAsNewick, "The tree is different than expected.");
         }
@@ -162,6 +186,8 @@ namespace Tests
         public void BuildTreeBootstrap()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentProtein, bootstrapReplicates: 100);
+
+            TolerateTree(tree);
 
             bool foundRootNode = false;
 
@@ -192,6 +218,8 @@ namespace Tests
         public void BuildTreeJCBootstrap()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentProtein, RapidNJ.EvolutionModel.JukesCantor, 100);
+
+            TolerateTree(tree);
 
             bool foundRootNode = false;
 
@@ -224,6 +252,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
             Assert.AreEqual(FullTreeShort, treeAsNewick, "The tree is different than expected.");
         }
@@ -234,6 +264,8 @@ namespace Tests
             Dictionary<string, string> alignment = GetAlignmentProtein(50, 10);
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment, allowNegativeBranches: false);
+
+            TolerateTree(tree);
 
             foreach (TreeNode node in tree.GetChildrenRecursiveLazy())
             {
@@ -254,6 +286,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment, RapidNJ.EvolutionModel.JukesCantor);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
             Assert.AreEqual(FullTreeShortJC, treeAsNewick, "The tree is different than expected.");
         }
@@ -264,6 +298,8 @@ namespace Tests
             Dictionary<string, string> alignment = GetAlignmentProtein(50, 10);
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment, RapidNJ.EvolutionModel.JukesCantor, allowNegativeBranches: false);
+
+            TolerateTree(tree);
 
             foreach (TreeNode node in tree.GetChildrenRecursiveLazy())
             {
@@ -282,6 +318,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentProtein, numCores: 1);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -291,6 +329,8 @@ namespace Tests
         public void BuildTree2cores()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentProtein, numCores: 2);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -302,6 +342,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentProtein, numCores: 4);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -312,6 +354,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentProtein, numCores: 10);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -321,6 +365,8 @@ namespace Tests
         public void BuildTree100cores()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentProtein, numCores: 100);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -337,6 +383,8 @@ namespace Tests
                 callCount++;
                 progress.Report(x);
             });
+
+            TolerateTree(tree);
 
             Assert.IsTrue(callCount > 0, "The progress callback was never called.");
 
@@ -355,6 +403,8 @@ namespace Tests
                 callCount++;
                 progress.Report(x);
             });
+
+            TolerateTree(tree);
 
             Assert.IsTrue(callCount > 0, "The progress callback was never called.");
 
@@ -388,6 +438,8 @@ namespace Tests
         public void BuildTreeFromLists()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentProtein.Keys.ToList(), FullAlignmentProtein.Values.ToList());
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 

@@ -49,6 +49,17 @@ namespace Tests
             return tbr;
         }
 
+        private static void TolerateTree(TreeNode tree)
+        {
+            foreach (TreeNode node in tree.GetChildrenRecursiveLazy())
+            {
+                if (Math.Abs(node.Length) < 1e-7)
+                {
+                    node.Length = 0;
+                }
+            }
+        }
+
         private static List<string> SequenceNames = ReadFasta(Assembly.GetExecutingAssembly().GetManifestResourceStream("Tests.Data.AlignmentDNA.fas")).Keys.ToList();
 
         private const string Tree2 = "('t33':0.15886,'t35':0.15886);";
@@ -56,7 +67,7 @@ namespace Tests
         private const string Tree4 = "(('t40':0.028306,'t33':0.090162):0.0098032,'t2':0.25594,'t35':0.062399);";
         private const string Tree10 = "((('t40':0.03624,'t35':0.067778):0.0020171,(((('t14':0.070353,'t5':0.072432):0.081091,'t8':0.00094573):0.025474,'t12':0.07349):0.089481,'t33':0.077276):0.0099832):0.081587,('t20':0.042888,'t2':0.073342):0.10005,'t25':0.024199);";
         private const string FullTree = "((((((('t4':0.047383,'t45':0.051):0.0092421,('t7':0.11185,'t30':0.036154):0.018282):0.072753,'t31':0.067808):0.0051978,'t6':0.033711):0.023156,((((('t14':0.074136,'t5':0.068649):0.076939,'t8':0.0050979):0.024401,'t12':0.074563):0.032114,((('t40':0.035421,'t35':0.068597):0.0065015,(('t20':0.044684,'t2':0.071546):0.10358,'t25':0.020673):0.077103):0.0065747,'t33':0.081997):0.056056):0.025946,(((((('t17':0.064559,'t29':0.067425):0.0090533,(('t32':0.12143,'t28':0.014715):0.010241,(('t41':0.056374,'t15':0.070383):0.021033,'t27':0.1375):0.061017):0.029866):0.02886,('t34':0.1009,'t13':0.017741):0.035089):0.076418,('t38':0.03919,'t42':0.044696):0.094981):0.0040325,'t21':0.038985):0.0089579,((('t9':0.073312,'t36':0.044068):0.023815,('t43':0.060585,'t37':0.013172):0.09307):0.03533,((('t46':0.0024457,'t22':0.019847):0.033494,(('t18':0.0051341,'t48':0.13012):0.057865,'t3':0.0099579):0.065856):0.079945,'t26':0.081354):0.04258):0.074675):0.050615):0.043369):0.001999,((('t24':0.12284,'t19':0.026459):0.015652,'t39':0.00088717):0.091683,'t50':0.043813):0.0094682):0.061071,((((('t10':0.038851,'t11':0.017661):0.054724,'t16':0.045774):0.061579,('t23':0.047232,'t49':0.0094125):0.10364):0.036765,'t44':0.069342):0.070703,'t1':0.037936):0.03408,'t47':0.020077);";
-        private const string FullTreeShort = "((((((('t24':0,'t19':0):-7.4506E-08,'t39':7.4506E-08):0.047451,'t34':0.19183):0.056606,'t30':-0.0049501):0.0024751,'t50':-0.0024751):0.0014647,((((((((((((((((('t32':0.0062317,'t41':0.57534):0.039963,'t27':0.031957):0.037274,'t15':0.015352):0.11676,'t29':-0.070186):0.032386,'t28':-0.032386):0.016751,'t17':-0.016751):0.031658,'t13':-0.031658):0.11588,'t5':0.07578):0.034224,'t40':-0.012694):0.0037279,(((((((('t9':0.28377,'t2':-0.17531):0.080537,'t20':0.17385):0.10248,'t37':0.021702):0.063564,'t43':0.097061):0.060253,(((((((('t48':0,'t18':0):0.65448,'t46':-0.4152):0.21211,'t22':-0.21211):0.10841,'t3':-0.10841):0.1088,'t26':0.15288):0.37288,'t33':-0.17656):0.20514,'t21':-0.046327):0.1364,'t36':-0.078888):0.058665):0.083799,'t8':-0.032713):0.013098,'t14':0.11312):0.0068192,'t25':-0.015693):0.0073157):0.0023943,'t35':-0.0079161):0.0043178,'t38':-0.0043178):0.010356,(('t1':0.080787,'t12':0.030785):0.041063,'t42':0.074446):0.054347):0.044835,(('t49':0,'t44':0):1.4901E-08,'t23':-1.4901E-08):0.041514):0.019866,((('t11':-0.04,'t10':0.14847):0.020606,'t16':-0.020606):0.075713,'t7':0.038339):0.089374):0.044754,'t45':-0.0068872):0.0030132,'t31':-0.0030132):0.0020307):0.00050019,('t6':-0.0035968,'t4':0.11206):0.0022479,'t47':-0.0022479);";
+        private const string FullTreeShort = "((((((('t24':0,'t19':0):0,'t39':0):0.047451,'t34':0.19183):0.056606,'t30':-0.0049501):0.0024751,'t50':-0.0024751):0.0014647,((((((((((((((((('t32':0.0062317,'t41':0.57534):0.039963,'t27':0.031957):0.037274,'t15':0.015352):0.11676,'t29':-0.070186):0.032386,'t28':-0.032386):0.016751,'t17':-0.016751):0.031658,'t13':-0.031658):0.11588,'t5':0.07578):0.034224,'t40':-0.012694):0.0037279,(((((((('t9':0.28377,'t2':-0.17531):0.080537,'t20':0.17385):0.10248,'t37':0.021702):0.063564,'t43':0.097061):0.060253,(((((((('t48':0,'t18':0):0.65448,'t46':-0.4152):0.21211,'t22':-0.21211):0.10841,'t3':-0.10841):0.1088,'t26':0.15288):0.37288,'t33':-0.17656):0.20514,'t21':-0.046327):0.1364,'t36':-0.078888):0.058665):0.083799,'t8':-0.032713):0.013098,'t14':0.11312):0.0068192,'t25':-0.015693):0.0073157):0.0023943,'t35':-0.0079161):0.0043178,'t38':-0.0043178):0.010356,(('t1':0.080787,'t12':0.030785):0.041063,'t42':0.074446):0.054347):0.044835,(('t49':0,'t44':0):0,'t23':0):0.041514):0.019866,((('t11':-0.04,'t10':0.14847):0.020606,'t16':-0.020606):0.075713,'t7':0.038339):0.089374):0.044754,'t45':-0.0068872):0.0030132,'t31':-0.0030132):0.0020307):0.00050019,('t6':-0.0035968,'t4':0.11206):0.0022479,'t47':-0.0022479);";
         private const string FullTreeShortNoNegative = "((((((('t24':0,'t19':0):0,'t39':0):0.047451,'t34':0.19183):0.051656,'t30':0):0,'t50':0):0.0014647,(((((((((((((((('t9':0.10847,'t2':0):0.080537,'t20':0.17385):0.10248,'t37':0.021702):0.063564,'t43':0.097061):0.060253,(((((((('t48':0,'t18':0):0.23928,'t46':0):0,'t22':0):0,'t3':0):0.1088,'t26':0.15288):0.19632,'t33':0):0.15881,'t21':0):0.057509,'t36':0):0.058665):0.051087,'t8':0):0.013098,'t14':0.11312):0,'t40':0):0.0043293,((((((((('t32':0.0062317,'t41':0.57534):0.043107,'t27':0.028813):0.038886,'t15':0.01374):0.062299,'t29':0):0,'t28':0):0,'t17':0):0,'t13':0):0.1149,'t5':0.07578):0.02153,'t25':0):0.0044958):0,'t35':0):0,'t38':0):0.0086984,(('t1':0.080787,'t12':0.030785):0.041063,'t42':0.074446):0.054347):0.044835,(('t49':0,'t44':0):0,'t23':0):0.041514):0.019866,((('t11':0,'t10':0.10847):0,'t16':0):0.075713,'t7':0.038339):0.089374):0.037867,'t45':0):0,'t31':0):0.0020307):0.001374,('t6':0,'t4':0.10847):0.001374,'t47':0);";
 
         private static float[][] DistMat2 = new float[][] { new float[] { 0, 0.158855692F }, new float[] { 0.158855692F, 0 } };
@@ -71,6 +82,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(DistMat2, SequenceNames.Take(2).ToList());
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(Tree2, treeAsNewick, "The tree is different than expected.");
@@ -80,6 +93,8 @@ namespace Tests
         public void BuildTree3()
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(DistMat3, SequenceNames.Take(3).ToList());
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -91,6 +106,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(DistMat4, SequenceNames.Take(4).ToList());
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(Tree4, treeAsNewick, "The tree is different than expected.");
@@ -101,6 +118,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(DistMat10, SequenceNames.Take(10).ToList());
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(Tree10, treeAsNewick, "The tree is different than expected.");
@@ -110,6 +129,8 @@ namespace Tests
         public void BuildTree50()
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(FullDistMat, SequenceNames);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -133,6 +154,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(matrixClone, SequenceNames, copyMatrix: false);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -143,6 +166,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(FullDistMatShort, SequenceNames);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
             Assert.AreEqual(FullTreeShort, treeAsNewick, "The tree is different than expected.");
         }
@@ -151,6 +176,8 @@ namespace Tests
         public void BuildTreeShortNoNegative()
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(FullDistMatShort, SequenceNames, allowNegativeBranches: false);
+
+            TolerateTree(tree);
 
             foreach (TreeNode node in tree.GetChildrenRecursiveLazy())
             {
@@ -169,6 +196,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(FullDistMat, SequenceNames, numCores: 1);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -178,6 +207,8 @@ namespace Tests
         public void BuildTree2cores()
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(FullDistMat, SequenceNames, numCores: 2);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -189,6 +220,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(FullDistMat, SequenceNames, numCores: 4);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -199,6 +232,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(FullDistMat, SequenceNames, numCores: 10);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -208,6 +243,8 @@ namespace Tests
         public void BuildTree100cores()
         {
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(FullDistMat, SequenceNames, numCores: 100);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -224,6 +261,8 @@ namespace Tests
                 callCount++;
                 progress.Report(x);
             });
+
+            TolerateTree(tree);
 
             Assert.IsTrue(callCount > 0, "The progress callback was never called.");
 
@@ -247,6 +286,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(matrixClone, SequenceNames);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -266,6 +307,8 @@ namespace Tests
             }
 
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(matrixClone, SequenceNames, copyMatrix: false);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -287,6 +330,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(matrixClone, SequenceNames);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -306,6 +351,8 @@ namespace Tests
             }
 
             TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(matrixClone, SequenceNames, copyMatrix: false);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -337,6 +384,8 @@ namespace Tests
                 }
 
                 TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(span, SequenceNames);
+
+                TolerateTree(tree);
 
                 string treeAsNewick = tree.ToString();
 
@@ -373,6 +422,8 @@ namespace Tests
                 }
 
                 TreeNode tree = RapidNJ.BuildTreeFromDistanceMatrix(span, SequenceNames, copyMatrix: false);
+
+                TolerateTree(tree);
 
                 string treeAsNewick = tree.ToString();
                                Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");

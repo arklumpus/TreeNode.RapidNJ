@@ -54,6 +54,17 @@ namespace Tests
             return tbr;
         }
 
+        private static void TolerateTree(TreeNode tree)
+        {
+            foreach (TreeNode node in tree.GetChildrenRecursiveLazy())
+            {
+                if (Math.Abs(node.Length) < 1e-7)
+                {
+                    node.Length = 0;
+                }
+            }
+        }
+
         private static Dictionary<string, string> FullAlignmentDNA = ReadFasta(Assembly.GetExecutingAssembly().GetManifestResourceStream("Tests.Data.AlignmentDNA.fas"));
 
         private static Dictionary<string, string> GetAlignmentDNA(int count, int length = 703)
@@ -83,9 +94,9 @@ namespace Tests
         private const string Tree10 = "((('t40':0.03624,'t35':0.067778):0.0020171,(((('t14':0.070353,'t5':0.072432):0.081091,'t8':0.00094573):0.025474,'t12':0.07349):0.089481,'t33':0.077276):0.0099832):0.081587,('t20':0.042888,'t2':0.073342):0.10005,'t25':0.024199);";
         private const string FullTree = "((((((('t4':0.047383,'t45':0.051):0.0092421,('t7':0.11185,'t30':0.036154):0.018282):0.072753,'t31':0.067808):0.0051978,'t6':0.033711):0.023156,((((('t14':0.074136,'t5':0.068649):0.076939,'t8':0.0050979):0.024401,'t12':0.074563):0.032114,((('t40':0.035421,'t35':0.068597):0.0065015,(('t20':0.044684,'t2':0.071546):0.10358,'t25':0.020673):0.077103):0.0065747,'t33':0.081997):0.056056):0.025946,(((((('t17':0.064559,'t29':0.067425):0.0090533,(('t32':0.12143,'t28':0.014715):0.010241,(('t41':0.056374,'t15':0.070383):0.021033,'t27':0.1375):0.061017):0.029866):0.02886,('t34':0.1009,'t13':0.017741):0.035089):0.076418,('t38':0.03919,'t42':0.044696):0.094981):0.0040325,'t21':0.038985):0.0089579,((('t9':0.073312,'t36':0.044068):0.023815,('t43':0.060585,'t37':0.013172):0.09307):0.03533,((('t46':0.0024457,'t22':0.019847):0.033494,(('t18':0.0051341,'t48':0.13012):0.057865,'t3':0.0099579):0.065856):0.079945,'t26':0.081354):0.04258):0.074675):0.050615):0.043369):0.001999,((('t24':0.12284,'t19':0.026459):0.015652,'t39':0.00088717):0.091683,'t50':0.043813):0.0094682):0.061071,((((('t10':0.038851,'t11':0.017661):0.054724,'t16':0.045774):0.061579,('t23':0.047232,'t49':0.0094125):0.10364):0.036765,'t44':0.069342):0.070703,'t1':0.037936):0.03408,'t47':0.020077);";
         private const string FullTreeJC = "((((('t24':0.12258,'t19':0.02669):0.01551,'t39':0.0010218):0.091414,'t50':0.043625):0.0096452,(((((('t10':0.038833,'t11':0.017679):0.054403,'t16':0.046069):0.061155,('t23':0.047224,'t49':0.0094066):0.10356):0.03692,'t44':0.069292):0.070575,'t1':0.037892):0.034031,'t47':0.020094):0.061078):0.0019826,(((('t4':0.047397,'t45':0.050964):0.0094052,('t7':0.11175,'t30':0.036198):0.018113):0.072486,'t31':0.067752):0.0051364,'t6':0.033607):0.023295,((((('t14':0.074034,'t5':0.068417):0.076881,'t8':0.0051179):0.024421,'t12':0.074586):0.03208,((('t40':0.035359,'t35':0.068547):0.0064597,(('t20':0.044633,'t2':0.071584):0.10351,'t25':0.020722):0.077072):0.0065767,'t33':0.081961):0.056078):0.025927,(((((('t17':0.06446,'t29':0.06738):0.0091669,(('t32':0.12133,'t28':0.014797):0.010215,(('t41':0.056366,'t15':0.070321):0.021268,'t27':0.13723):0.060836):0.029843):0.028814,('t34':0.10071,'t13':0.017929):0.03501):0.076454,('t38':0.039381,'t42':0.044505):0.094905):0.0039584,'t21':0.039058):0.0089745,((('t9':0.073471,'t36':0.043904):0.023726,('t43':0.060505,'t37':0.013215):0.093062):0.035308,((('t46':0.0024529,'t22':0.019831):0.033821,(('t18':0.0047715,'t48':0.13047):0.057592,'t3':0.010101):0.065562):0.07966,'t26':0.081479):0.042548):0.074611):0.050547):0.043288);";
-        private const string FullTreeShort = "((((((('t24':0,'t19':0):-7.4506E-08,'t39':7.4506E-08):0.047451,'t34':0.19183):0.056606,'t30':-0.0049501):0.0024751,'t50':-0.0024751):0.0014647,((((((((((((((((('t32':0.0062317,'t41':0.57534):0.039963,'t27':0.031957):0.037274,'t15':0.015352):0.11676,'t29':-0.070186):0.032386,'t28':-0.032386):0.016751,'t17':-0.016751):0.031658,'t13':-0.031658):0.11588,'t5':0.07578):0.034224,'t40':-0.012694):0.0037279,(((((((('t9':0.28377,'t2':-0.17531):0.080537,'t20':0.17385):0.10248,'t37':0.021702):0.063564,'t43':0.097061):0.060253,(((((((('t48':0,'t18':0):0.65448,'t46':-0.4152):0.21211,'t22':-0.21211):0.10841,'t3':-0.10841):0.1088,'t26':0.15288):0.37288,'t33':-0.17656):0.20514,'t21':-0.046327):0.1364,'t36':-0.078888):0.058665):0.083799,'t8':-0.032713):0.013098,'t14':0.11312):0.0068192,'t25':-0.015693):0.0073157):0.0023943,'t35':-0.0079161):0.0043178,'t38':-0.0043178):0.010356,(('t1':0.080787,'t12':0.030785):0.041063,'t42':0.074446):0.054347):0.044835,(('t49':0,'t44':0):1.4901E-08,'t23':-1.4901E-08):0.041514):0.019866,((('t11':-0.04,'t10':0.14847):0.020606,'t16':-0.020606):0.075713,'t7':0.038339):0.089374):0.044754,'t45':-0.0068872):0.0030132,'t31':-0.0030132):0.0020307):0.00050019,('t6':-0.0035968,'t4':0.11206):0.0022479,'t47':-0.0022479);";
+        private const string FullTreeShort = "((((((('t24':0,'t19':0):0,'t39':0):0.047451,'t34':0.19183):0.056606,'t30':-0.0049501):0.0024751,'t50':-0.0024751):0.0014647,((((((((((((((((('t32':0.0062317,'t41':0.57534):0.039963,'t27':0.031957):0.037274,'t15':0.015352):0.11676,'t29':-0.070186):0.032386,'t28':-0.032386):0.016751,'t17':-0.016751):0.031658,'t13':-0.031658):0.11588,'t5':0.07578):0.034224,'t40':-0.012694):0.0037279,(((((((('t9':0.28377,'t2':-0.17531):0.080537,'t20':0.17385):0.10248,'t37':0.021702):0.063564,'t43':0.097061):0.060253,(((((((('t48':0,'t18':0):0.65448,'t46':-0.4152):0.21211,'t22':-0.21211):0.10841,'t3':-0.10841):0.1088,'t26':0.15288):0.37288,'t33':-0.17656):0.20514,'t21':-0.046327):0.1364,'t36':-0.078888):0.058665):0.083799,'t8':-0.032713):0.013098,'t14':0.11312):0.0068192,'t25':-0.015693):0.0073157):0.0023943,'t35':-0.0079161):0.0043178,'t38':-0.0043178):0.010356,(('t1':0.080787,'t12':0.030785):0.041063,'t42':0.074446):0.054347):0.044835,(('t49':0,'t44':0):0,'t23':0):0.041514):0.019866,((('t11':-0.04,'t10':0.14847):0.020606,'t16':-0.020606):0.075713,'t7':0.038339):0.089374):0.044754,'t45':-0.0068872):0.0030132,'t31':-0.0030132):0.0020307):0.00050019,('t6':-0.0035968,'t4':0.11206):0.0022479,'t47':-0.0022479);";
         private const string FullTreeShortNoNegative = "((((((('t24':0,'t19':0):0,'t39':0):0.047451,'t34':0.19183):0.051656,'t30':0):0,'t50':0):0.0014647,(((((((((((((((('t9':0.10847,'t2':0):0.080537,'t20':0.17385):0.10248,'t37':0.021702):0.063564,'t43':0.097061):0.060253,(((((((('t48':0,'t18':0):0.23928,'t46':0):0,'t22':0):0,'t3':0):0.1088,'t26':0.15288):0.19632,'t33':0):0.15881,'t21':0):0.057509,'t36':0):0.058665):0.051087,'t8':0):0.013098,'t14':0.11312):0,'t40':0):0.0043293,((((((((('t32':0.0062317,'t41':0.57534):0.043107,'t27':0.028813):0.038886,'t15':0.01374):0.062299,'t29':0):0,'t28':0):0,'t17':0):0,'t13':0):0.1149,'t5':0.07578):0.02153,'t25':0):0.0044958):0,'t35':0):0,'t38':0):0.0086984,(('t1':0.080787,'t12':0.030785):0.041063,'t42':0.074446):0.054347):0.044835,(('t49':0,'t44':0):0,'t23':0):0.041514):0.019866,((('t11':0,'t10':0.10847):0,'t16':0):0.075713,'t7':0.038339):0.089374):0.037867,'t45':0):0,'t31':0):0.0020307):0.001374,('t6':0,'t4':0.10847):0.001374,'t47':0);";
-        private const string FullTreeShortJC = "(((((((((('t28':-0.020106,'t41':0.3242):0.0054904,((('t32':0.065739,'t15':0.071002):0.0056945,'t27':0.062676):0.096708,'t29':-0.028338):0.014265):0.0027829,'t17':-0.01266):0.027058,'t13':-0.027058):0.11272,'t5':0.078807):0.032485,'t8':-0.010145):0.0059177,'t38':-0.0059177):0.0011695,((((((((((((('t24':0,'t19':0):-5.9605E-08,'t39':5.9605E-08):0.03676,'t34':0.19586):0.068037,'t45':-0.014374):0.007666,'t30':-0.007666):0.0017026,'t4':0.11327):0.0014481,'t6':-0.0052695):0.0028543,'t31':-0.0028543):0.0015569,'t50':-0.0015569):0.00085627,'t47':-0.00085627):0.035586,((('t49':0,'t44':0):-7.4506E-09,'t23':7.4506E-09):0.028622,((('t11':-0.03282,'t10':0.14015):0.016853,'t16':-0.016853):0.07606,'t7':0.035757):0.087686):0.020845):0.063731,(('t42':0.041157,'t33':0.19146):0.030991,('t1':0.077708,'t12':0.029618):0.037958):0.045198):0.012835,'t40':-0.0074799):0.0045806):0.00084121,('t35':-0.0059058,'t14':0.11323):0.0019625):0.0060201,((((('t9':0.13954,'t2':-0.032212):0.029624,'t20':0.22458):0.062369,'t37':0.060242):0.045239,'t43':0.10554):0.053307,((((((('t48':0,'t18':0):0.45885,'t46':-0.22624):0.11558,'t22':-0.11558):0.059073,'t3':-0.059073):0.15657,'t26':0.089347):0.13749,'t21':-0.012523):0.10526,'t36':-0.055921):0.052481):0.076513,'t25':-0.0091516);";
+        private const string FullTreeShortJC = "(((((((((('t28':-0.020106,'t41':0.3242):0.0054904,((('t32':0.065739,'t15':0.071002):0.0056945,'t27':0.062676):0.096708,'t29':-0.028338):0.014265):0.0027829,'t17':-0.01266):0.027058,'t13':-0.027058):0.11272,'t5':0.078807):0.032485,'t8':-0.010145):0.0059177,'t38':-0.0059177):0.0011695,((((((((((((('t24':0,'t19':0):0,'t39':0):0.03676,'t34':0.19586):0.068037,'t45':-0.014374):0.007666,'t30':-0.007666):0.0017026,'t4':0.11327):0.0014481,'t6':-0.0052695):0.0028543,'t31':-0.0028543):0.0015569,'t50':-0.0015569):0.00085627,'t47':-0.00085627):0.035586,((('t49':0,'t44':0):0,'t23':0):0.028622,((('t11':-0.03282,'t10':0.14015):0.016853,'t16':-0.016853):0.07606,'t7':0.035757):0.087686):0.020845):0.063731,(('t42':0.041157,'t33':0.19146):0.030991,('t1':0.077708,'t12':0.029618):0.037958):0.045198):0.012835,'t40':-0.0074799):0.0045806):0.00084121,('t35':-0.0059058,'t14':0.11323):0.0019625):0.0060201,((((('t9':0.13954,'t2':-0.032212):0.029624,'t20':0.22458):0.062369,'t37':0.060242):0.045239,'t43':0.10554):0.053307,((((((('t48':0,'t18':0):0.45885,'t46':-0.22624):0.11558,'t22':-0.11558):0.059073,'t3':-0.059073):0.15657,'t26':0.089347):0.13749,'t21':-0.012523):0.10526,'t36':-0.055921):0.052481):0.076513,'t25':-0.0091516);";
         private const string FullTreeShortJCNoNegative = "(((((((((('t28':0,'t41':0.3041):0.0054904,((('t32':0.065739,'t15':0.071002):0.0056945,'t27':0.062676):0.068371,'t29':0):0.014265):0,'t17':0):0,'t13':0):0.11025,'t5':0.078807):0.02234,'t8':0):0,'t38':0):0.0011695,((((((((((((('t24':0,'t19':0):0,'t39':0):0.03676,'t34':0.19586):0.053663,'t45':0):0,'t30':0):0.0017026,'t4':0.11327):0,'t6':0):0,'t31':0):0,'t50':0):0,'t47':0):0.035347,((('t49':0,'t44':0):0,'t23':0):0.028622,((('t11':0,'t10':0.10733):0,'t16':0):0.07606,'t7':0.035757):0.087686):0.020845):0.063731,(('t42':0.041157,'t33':0.19146):0.030991,('t1':0.077708,'t12':0.029618):0.037958):0.045198):0.0053552,'t40':0):0.0045806):0.00084121,('t35':0,'t14':0.10733):0.0019625):0.0060201,((((('t9':0.10733,'t2':0):0.029624,'t20':0.22458):0.062369,'t37':0.060242):0.045239,'t43':0.10554):0.053307,((((((('t48':0,'t18':0):0.23262,'t46':0):0,'t22':0):0,'t3':0):0.15657,'t26':0.089347):0.12496,'t21':0):0.049335,'t36':0):0.052481):0.067361,'t25':0);";
 
         private static float[][] DistMat2 = new float[][] { new float[] { 0, 0.158855692F }, new float[] { 0.158855692F, 0 } };
@@ -102,6 +113,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(Tree2, treeAsNewick, "The tree is different than expected.");
@@ -113,6 +126,8 @@ namespace Tests
             Dictionary<string, string> alignment = GetAlignmentDNA(3);
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -126,6 +141,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(Tree4, treeAsNewick, "The tree is different than expected.");
@@ -137,6 +154,8 @@ namespace Tests
             Dictionary<string, string> alignment = GetAlignmentDNA(10);
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -150,6 +169,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -159,6 +180,9 @@ namespace Tests
         public void BuildTreeJC()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentDNA, RapidNJ.EvolutionModel.JukesCantor);
+            
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
             Assert.AreEqual(FullTreeJC, treeAsNewick, "The tree is different than expected.");
         }
@@ -167,6 +191,8 @@ namespace Tests
         public void BuildTreeBootstrap()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentDNA, bootstrapReplicates: 100);
+
+            TolerateTree(tree);
 
             bool foundRootNode = false;
 
@@ -197,6 +223,8 @@ namespace Tests
         public void BuildTreeJCBootstrap()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentDNA, RapidNJ.EvolutionModel.JukesCantor, 100);
+
+            TolerateTree(tree);
 
             bool foundRootNode = false;
 
@@ -229,6 +257,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
             Assert.AreEqual(FullTreeShort, treeAsNewick, "The tree is different than expected.");
         }
@@ -239,6 +269,8 @@ namespace Tests
             Dictionary<string, string> alignment = GetAlignmentDNA(50, 10);
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment, allowNegativeBranches: false);
+
+            TolerateTree(tree);
 
             foreach (TreeNode node in tree.GetChildrenRecursiveLazy())
             {
@@ -259,6 +291,8 @@ namespace Tests
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment, RapidNJ.EvolutionModel.JukesCantor);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
             Assert.AreEqual(FullTreeShortJC, treeAsNewick, "The tree is different than expected.");
         }
@@ -269,6 +303,8 @@ namespace Tests
             Dictionary<string, string> alignment = GetAlignmentDNA(50, 10);
 
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(alignment, RapidNJ.EvolutionModel.JukesCantor, allowNegativeBranches: false);
+
+            TolerateTree(tree);
 
             foreach (TreeNode node in tree.GetChildrenRecursiveLazy())
             {
@@ -287,6 +323,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentDNA, numCores: 1);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -296,6 +334,8 @@ namespace Tests
         public void BuildTree2cores()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentDNA, numCores: 2);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -307,6 +347,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentDNA, numCores: 4);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -317,6 +359,8 @@ namespace Tests
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentDNA, numCores: 10);
 
+            TolerateTree(tree);
+
             string treeAsNewick = tree.ToString();
 
             Assert.AreEqual(FullTree, treeAsNewick, "The tree is different than expected.");
@@ -326,6 +370,8 @@ namespace Tests
         public void BuildTree100cores()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentDNA, numCores: 100);
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
@@ -342,6 +388,8 @@ namespace Tests
                 callCount++;
                 progress.Report(x);
             });
+
+            TolerateTree(tree);
 
             Assert.IsTrue(callCount > 0, "The progress callback was never called.");
 
@@ -360,6 +408,8 @@ namespace Tests
                 callCount++;
                 progress.Report(x);
             });
+
+            TolerateTree(tree);
 
             Assert.IsTrue(callCount > 0, "The progress callback was never called.");
 
@@ -393,6 +443,8 @@ namespace Tests
         public void BuildTreeFromLists()
         {
             TreeNode tree = RapidNJ.BuildTreeFromAlignment(FullAlignmentDNA.Keys.ToList(), FullAlignmentDNA.Values.ToList());
+
+            TolerateTree(tree);
 
             string treeAsNewick = tree.ToString();
 
